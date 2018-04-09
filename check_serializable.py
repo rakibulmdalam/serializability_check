@@ -21,7 +21,7 @@ def isConflicting(op1, op2):
 # ---------------------
 def check_dependency(history, t_graph):
     for i in range(1, len(history)):
-        for j in range(1, i):
+        for j in range(0, i):
             r = history[i]['tid']
             c = history[j]['tid']
             # if there is an existing True (Dependency info), we will not over-write
@@ -39,13 +39,13 @@ def cyclic(tg):
         for j in range(i + 1, n):
             if tg[i][j] is True and tg[i][j] == tg[j][i]:
                 # cycle exists,
-                # i.g. transaction i depends on transaction j and vise versa
+                # i.g. transaction i depends on transaction j and vice-versa
                 exists = True
                 break
     return exists
 
 
-def process_input():
+def manage_input():
     input_history = input('Enter History: ').split(' ')
     history = []
     transactions = set()
@@ -63,7 +63,7 @@ def process_input():
 
 
 def main():
-    history, transactions = process_input()
+    history, transactions = manage_input()
     t_graph = []
     n = len(transactions)
     for i in range(0, n):
