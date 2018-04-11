@@ -30,11 +30,20 @@ def check_dependency(history, t_graph):
     return t_graph
 
 
+def get_ancestors(t, tg):
+    pass
+
+
 def cyclic(tg):
     exists = False
     # number of transactions
     n = len(tg)
+    t_list = [i for i in range(0, n)]
+    print(t_list)
+    for t in t_list:
+        get_ancestors(t, tg)
     # exploring tg
+    '''
     for i in range(0, n):
         for j in range(i + 1, n):
             if tg[i][j] is True and tg[i][j] == tg[j][i]:
@@ -42,6 +51,7 @@ def cyclic(tg):
                 # i.g. transaction i depends on transaction j and vice-versa
                 exists = True
                 break
+    '''
     return exists
 
 
@@ -70,8 +80,6 @@ def main():
         t_graph.append([])
         for j in range(0, n):
             t_graph[i].append(False)
-
-    print(t_graph)
     t_graph = check_dependency(history, t_graph)
     print(not cyclic(t_graph))
 
